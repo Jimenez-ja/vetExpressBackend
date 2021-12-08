@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const { check } = require('express-validator');
-const { postPayment, getPaymentById } = require('../controllers/payments');
+const { postPayment, getPaymentById, getPaymentMonthly, getPayments } = require('../controllers/payments');
 const { validateFields } = require('../middlewares/validate-fields');
 const { validateJWT } = require('../middlewares/validate-jwt');
 
@@ -10,6 +10,16 @@ router.get('/', [
     validateJWT,
     validateFields
 ], getPaymentById)
+
+router.get('/appointmentsMonthly', [
+    validateJWT,
+    validateFields
+], getPaymentMonthly)
+
+router.get('/appointments', [
+    validateJWT,
+    validateFields
+], getPayments)
 
 router.post('/', [
     validateJWT,

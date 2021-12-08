@@ -1,5 +1,6 @@
 const checkoutNodeJssdk = require('@paypal/checkout-server-sdk');
 const payPalClient = require('../Common/payPalClient');
+const moment = require('moment');
 
 const Payment = require('../models/payment');
 
@@ -10,6 +11,32 @@ const getPaymentById = async(req, res) => {
     const payment = await Payment.find({ user: authUser._id })
         .populate('user', ['name'])
         .sort({ _id: 'desc' })
+
+    res.json({
+        payment
+    })
+
+}
+
+const getPaymentMonthly = async(req, res)=>{
+
+    const start = moment().startOf('month').format('MM/DD/YYYY');
+    const end   = moment().endOf('month').format('MM/DD/YYYY');
+
+    const payment = await Payment.find({date:{$gte: start, $lte: end}});
+
+    const total = payment.length;
+
+    res.json({
+        total,
+        payment
+    })
+
+}
+
+const getPayments = async(req, res) =>{
+
+    const payment = await Payment.find();
 
     res.json({
         payment
@@ -55,5 +82,7 @@ const postPayment = async(req, res) => {
 
 module.exports = {
     getPaymentById,
+    getPaymentMonthly,
+    getPayments,
     postPayment
 }
