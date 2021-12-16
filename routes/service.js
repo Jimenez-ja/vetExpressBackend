@@ -1,7 +1,8 @@
 const { Router } = require('express');
 const { check } = require('express-validator');
-const { postService, getServices, getService } = require('../controllers/service');
+const { postService, getServices, getService, deleteService, putService } = require('../controllers/service');
 const { validateFields } = require('../middlewares/validate-fields');
+const { validateJWT } = require('../middlewares/validate-jwt');
 
 const router = new Router();
 
@@ -29,6 +30,21 @@ router.post('/', [
     check('time', 'El tiempo aproximado debe de ser string').isString(),
     validateFields
 ], postService);
+
+
+router.put('/:id', [
+    validateJWT,
+    check('id', 'El id es obligatorio').notEmpty(),
+    check('id', 'El id es invalido').isMongoId(),
+    validateFields
+], putService)
+
+router.delete('/', [
+    validateJWT,
+    check('id', 'el id es obligatorio').notEmpty(),
+    check('id', 'el id es invalido').isMongoId(),
+    validateFields
+], deleteService);
 
 
 

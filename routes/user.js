@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const { check } = require('express-validator');
-const { getUsers, getUser, postUser, putUser, deleteUser } = require('../controllers/user');
+const { getUsers, getUser, postUser, putUser, deleteUser, getTotalUsers } = require('../controllers/user');
 const { validateFields } = require('../middlewares/validate-fields');
 const { validateJWT } = require('../middlewares/validate-jwt');
 
@@ -11,10 +11,11 @@ router.get('/', [
 
 ], getUsers);
 
-//mostrar usuario por id
-router.get('/:id', [
+router.get('/all', [
+    validateJWT,
+    validateFields
+], getTotalUsers)
 
-], getUser);
 
 //crear usuario
 router.post('/', [

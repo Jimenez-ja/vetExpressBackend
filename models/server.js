@@ -14,6 +14,7 @@ class Server {
             auth: '/api/auth',
             payments: '/api/payment',
             pet: '/api/pet',
+            review: '/api/review',
             service: '/api/service',
             user: '/api/user',
         }
@@ -49,6 +50,7 @@ class Server {
         this.app.use(this.paths.auth, require('../routes/auth'));
         this.app.use(this.paths.payments, require('../routes/payments'));
         this.app.use(this.paths.pet, require('../routes/pet'));
+        this.app.use(this.paths.review, require('../routes/review'));
         this.app.use(this.paths.service, require('../routes/service'));
         this.app.use(this.paths.user, require('../routes/user'));
 

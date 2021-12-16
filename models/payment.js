@@ -33,7 +33,7 @@ const PaymentSchema = Schema({
         required: [true, 'El servicio es obligatorio']
     },
     amount: {
-        type: Object,
+        type: Number,
         required: [true, 'La cantidad es obligatoria']
     },
     status_appointment: {

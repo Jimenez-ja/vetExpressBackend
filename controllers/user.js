@@ -11,6 +11,16 @@ const getUsers = (req, res = response) => {
 
 }
 
+const getTotalUsers = async(req, res) => {
+
+    const user = await User.find({ state: true });
+
+    const total = user.length;
+    res.json({
+        total
+    })
+}
+
 const getUser = (req, res = response) => {
 
     return res.status(200).json({
@@ -83,6 +93,7 @@ const deleteUser = (req, res = response) => {
 module.exports = {
     getUsers,
     getUser,
+    getTotalUsers,
     postUser,
     putUser,
     deleteUser
