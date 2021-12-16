@@ -1,5 +1,5 @@
 const checkoutNodeJssdk = require('@paypal/checkout-server-sdk');
-const payPalClient = require('../Common/payPalClient');
+const payPalClient = require('../common/payPalClient');
 const moment = require('moment');
 
 const Payment = require('../models/payment');
