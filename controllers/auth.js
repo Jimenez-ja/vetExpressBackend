@@ -20,9 +20,6 @@ const login = async(req, res = response) => {
             return res.status(400).json({ err: "Usuario / Password Incorrecto (estado)" });
         }
 
-        if (!user.emailValidate) {
-            return res.status(400).json({ err: "Falta validacion de correo electronico" });
-        }
 
         const validPassword = bcrypt.compareSync(password, user.password);
 
