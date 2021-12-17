@@ -25,7 +25,6 @@ router.get('/:id', [
 ], getReview)
 
 router.get('/service/:id', [
-    validateJWT,
     check('id', 'El id es obligatorio').notEmpty(),
     check('id', 'El id es invalido').isMongoId(),
     validateFields
